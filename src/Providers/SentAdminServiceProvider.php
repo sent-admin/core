@@ -23,23 +23,35 @@ class SentAdminServiceProvider  extends ServiceProvider{
 	 */
 	public function boot(): void{
 		$this->registerEvents();
+		$this->registerRoute();
 	}
 
-    /**
-     * register
-     *
-     * @return void
-     * @throws ReflectionException
-     */
-    public function register(): void{
+	/**
+	 * register
+	 *
+	 * @return void
+	 * @throws ReflectionException
+	 */
+	public function register(): void{
 	}
 
-    /**
-     * register events
-     *
-     * @return void
-     */
-    protected function registerEvents(): void{
-        Event::listen(RequestHandled::class, \Sent\Listeners\RequestHandledListener::class);
-    }
+	/**
+	 * register events
+	 *
+	 * @return void
+	 */
+	protected function registerEvents(): void{
+		Event::listen(RequestHandled::class, \Sent\Listeners\RequestHandledListener::class);
+	}
+
+	protected function registerRoute(){
+		$all_route_file = scandir(base_path("routes/api"));
+		foreach ($all_route_file as $val) {
+			if (strstr($val, ".php")) {
+				Route::middleware("api")
+					->namespace($this->namespace)
+					->group(base_path("routes/api/" . $val));
+			}
+		}
+	}
 }
