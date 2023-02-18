@@ -1,6 +1,6 @@
 {
-    "name": "sent-admin/core",
-    "description": "sent-admin",
+    "name": "sentadmin/core",
+    "description": "sent admin core packag",
     "type": "library",
     "require": {
         "php": "^7.0",
@@ -8,8 +8,11 @@
     },
     "license": "MIT",
     "autoload": {
+        "files": [
+            "src/Support/helpers.php"
+        ],
         "psr-4": {
-            "SentAdmin\\Core\\": "src/"
+            "Sent\\": "src/"
         }
     },
     "authors": [
@@ -17,5 +20,13 @@
             "name": "molong",
             "email": "ycgpp@126.com"
         }
-    ]
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Sent\\Providers\\SentAdminServiceProvider"
+            ]
+        }
+    },
+    "minimum-stability": "dev"
 }

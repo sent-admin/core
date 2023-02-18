@@ -1,2 +1,2 @@
-# core
+# sent-admin
 sent-admin
