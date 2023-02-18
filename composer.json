@@ -1,0 +1,21 @@
+{
+    "name": "sent-admin/core",
+    "description": "sent-admin",
+    "type": "library",
+    "require": {
+        "php": "^7.0",
+        "ext-pdo": "*"
+    },
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "SentAdmin\\Core\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "molong",
+            "email": "ycgpp@126.com"
+        }
+    ]
+}
