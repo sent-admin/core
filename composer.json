@@ -3,7 +3,7 @@
     "description": "sent admin core packag",
     "type": "library",
     "require": {
-        "php": ">=7.0",
+        "php": "^8.0",
         "ext-pdo": "*"
     },
     "license": "MIT",
