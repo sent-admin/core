@@ -3,7 +3,7 @@
     "description": "sent admin core packag",
     "type": "library",
     "require": {
-        "php": "^7.0",
+        "php": "^7.0|^8.0",
         "ext-pdo": "*"
     },
     "license": "MIT",
@@ -24,7 +24,8 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Sent\\Providers\\SentAdminServiceProvider"
+                "Sent\\Providers\\SentAdminServiceProvider",
+                "Sent\\Providers\\RouteServiceProvider"
             ]
         }
     },

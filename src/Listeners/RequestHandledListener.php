@@ -35,25 +35,25 @@ class RequestHandledListener{
      * @param mixed $data
      * @return array
      */
-    protected function formatData(mixed $data): array{
-        $responseData = [
-            'code' => 1,
-            'message' => '',
-        ];
+    protected function formatData(mixed $responseData): array{
+        $result = [];
+        $data = $responseData->data;
 
         if (is_object($data) && property_exists($data, 'per_page')
             && property_exists($data, 'total')
             && property_exists($data, 'current_page')) {
-            $responseData['data'] = $data->data;
-            $responseData['total'] = $data->total;
-            $responseData['limit'] = $data->per_page;
-            $responseData['page'] = $data->current_page;
-
-            return $responseData;
+            $result['data'] = $data->data;
+            $result['total'] = $data->total;
+            $result['limit'] = $data->per_page;
+            $result['page'] = $data->current_page;
+        }else{
+            $result = [
+                'code' => $responseData->code ? $responseData->code : 0,
+                'message' => $responseData->message ? $responseData->message : '',
+                'data' => $responseData->data ? $responseData->data : '',
+            ];
         }
 
-        $responseData['data'] = $data;
-
-        return $responseData;
+        return $result;
     }
 }

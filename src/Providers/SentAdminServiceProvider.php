@@ -11,6 +11,10 @@ namespace Sent\Providers;
 use Illuminate\Foundation\Http\Events\RequestHandled;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Cache\RateLimiting\Limit;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\RateLimiter;
+use Illuminate\Support\Facades\Route;
 
 class SentAdminServiceProvider  extends ServiceProvider{
 
@@ -23,7 +27,6 @@ class SentAdminServiceProvider  extends ServiceProvider{
 	 */
 	public function boot(): void{
 		$this->registerEvents();
-		$this->registerRoute();
 	}
 
 	/**
@@ -42,16 +45,5 @@ class SentAdminServiceProvider  extends ServiceProvider{
 	 */
 	protected function registerEvents(): void{
 		Event::listen(RequestHandled::class, \Sent\Listeners\RequestHandledListener::class);
-	}
-
-	protected function registerRoute(){
-		$all_route_file = scandir(base_path("routes/api"));
-		foreach ($all_route_file as $val) {
-			if (strstr($val, ".php")) {
-				Route::middleware("api")
-					->namespace($this->namespace)
-					->group(base_path("routes/api/" . $val));
-			}
-		}
 	}
 }
