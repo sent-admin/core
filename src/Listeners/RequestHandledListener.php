@@ -8,7 +8,6 @@
 // +----------------------------------------------------------------------
 namespace Sent\Listeners;
 
-use Catch\Enums\Code;
 use Illuminate\Foundation\Http\Events\RequestHandled;
 use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
 use Illuminate\Http\JsonResponse;
@@ -38,8 +37,8 @@ class RequestHandledListener{
      */
     protected function formatData(mixed $data): array{
         $responseData = [
-            'code' => Code::SUCCESS->value(),
-            'message' => Code::SUCCESS->message(),
+            'code' => 1,
+            'message' => '',
         ];
 
         if (is_object($data) && property_exists($data, 'per_page')
