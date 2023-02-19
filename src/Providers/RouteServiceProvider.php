@@ -36,12 +36,14 @@ class RouteServiceProvider extends ServiceProvider{
 			Route::middleware('web')
 				->group(base_path('routes/web.php'));
 		});
-
-		$route_file = scandir(base_path("routes"));
+        if(!file_exists(base_path("routes/api"))){
+            mkdir(base_path("routes/api"));
+        }
+		$route_file = scandir(base_path("routes/api"));
 		foreach ($route_file as $route) {
-			if (strstr($route, ".php") && !in_array($route, ['channels.php', 'console.php', 'web.php'])) {
+			if (strstr($route, ".php")) {
 				Route::middleware('api')
-					->group(base_path("routes/" . $route));
+					->group(base_path("routes/api/" . $route));
 			}
 		}
 	}

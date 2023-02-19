@@ -16,15 +16,15 @@ use Illuminate\Support\Facades\Event;
 use Throwable;
 
 class AuthMiddleware{
-	
-	public function handle(Request $request, \Closure $next, $guards){
+
+	public function handle(Request $request, \Closure $next, ...$guards){
 		try {
 			if (! $user = Auth::guard($guards)->user()) {
 				throw new AuthenticationException();
 			}
 			return $next($request);
 		} catch (Exception|Throwable $e) {
-			throw new Exception("relogin", 2000);
+			return response()->json(['code' => 2000, 'message' => '请重新登录！']);
 		}
 	}
 }
